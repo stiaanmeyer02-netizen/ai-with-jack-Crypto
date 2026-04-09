@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CryptoRadar — Personal Intelligence Dashboard</title>
+  <meta name="description"
+    content="Live crypto intelligence dashboard showing top performers and early-warning radar for rising coins." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header" style="position:relative">
+    <div class="header-left">
+      <div class="logo">
+        <svg width="24" height="24" viewBox="0 0 22 22" fill="none">
+          <circle cx="11" cy="11" r="10" stroke="#3b82f6" stroke-width="1.5" />
+          <path d="M7 11 L11 5 L15 11 L11 17 Z" fill="#3b82f6" opacity="0.8" />
+          <circle cx="11" cy="11" r="2.5" fill="#60a5fa" />
+        </svg>
+        <span class="logo-text">CryptoRadar</span>
+      </div>
+      <div class="header-divider"></div>
+      <div class="header-status" id="headerStatus">
+        <span class="pulse-dot" id="statusDot"></span>
+        <span class="status-text" id="statusText">Connecting…</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="last-updated">
+        <span class="label">Last updated</span>
+        <span class="value" id="lastUpdated">—</span>
+      </div>
+      <div class="global-stats" id="globalStats">
+        <span class="global-stat">
+          <span class="label">BTC Dom</span>
+          <span class="value" id="btcDominance">—</span>
+        </span>
+        <span class="sep">·</span>
+        <span class="global-stat">
+          <span class="label">Mkt Cap</span>
+          <span class="value" id="totalMarketCap">—</span>
+        </span>
+      </div>
+      <button class="refresh-btn" id="refreshBtn" title="Refresh data">
+        <svg id="refreshIcon" width="15" height="15" viewBox="0 0 15 15" fill="none">
+          <path d="M1.85 7.5A5.65 5.65 0 0 1 11.9 3.6L13.5 2V6h-4l1.6-1.6A3.65 3.65 0 1 0 11.15 9.5"
+            stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        Refresh
+      </button>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- === SECTION 1: TOP PERFORMERS === -->
+    <section class="section" id="topPerformersSection">
+      <div class="section-header">
+        <div class="section-title-block">
+          <div class="section-badge badge-green">▲ PERFORMING</div>
+          <h2 class="section-title">Top 5 Best Performing</h2>
+          <p class="section-subtitle">24h price change — highest gainers across the market</p>
+        </div>
+        <div class="time-selector">
+          <button class="time-btn active" data-time="1">1H</button>
+          <button class="time-btn" data-time="24">24H</button>
+          <button class="time-btn" data-time="168">7D</button>
+        </div>
+      </div>
+      <div class="cards-grid" id="topPerformersGrid">
+        <div class="card skeleton"></div>
+        <div class="card skeleton"></div>
+        <div class="card skeleton"></div>
+        <div class="card skeleton"></div>
+        <div class="card skeleton"></div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="section-divider">
+      <div class="divider-line"></div>
+      <div class="divider-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="3" fill="#f59e0b" />
+          <path
+            d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41"
+            stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round" />
+        </svg>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- === SECTION 2: EARLY WARNING RADAR === -->
+    <section class="section" id="radarSection">
+      <div class="section-header">
+        <div class="section-title-block">
+          <div class="section-badge badge-amber">◈ RADAR</div>
+          <h2 class="section-title">Early Warning Radar</h2>
+          <p class="section-subtitle">Rising momentum signals — volume surge + price breakout before the crowd</p>
+        </div>
+        <div class="radar-legend">
+          <span class="legend-item"><span class="dot dot-amber"></span>Volume spike</span>
+          <span class="legend-item"><span class="dot dot-blue"></span>Price breakout</span>
+          <span class="legend-item"><span class="dot dot-green"></span>RSI rising</span>
+        </div>
+      </div>
+      <div class="cards-grid" id="radarGrid">
+        <div class="card skeleton"></div>
+        <div class="card skeleton"></div>
+        <div class="card skeleton"></div>
+        <div class="card skeleton"></div>
+        <div class="card skeleton"></div>
+      </div>
+    </section>
+
+    <!-- Market Breadth Bar -->
+    <section class="breadth-section">
+      <div class="breadth-header">
+        <span class="section-badge badge-blue">◎ MARKET BREADTH</span>
+        <span class="breadth-summary" id="breadthSummary">—</span>
+      </div>
+      <div class="breadth-bar-container">
+        <div class="breadth-bar-track">
+          <div class="breadth-bar-fill green" id="breadthGreen" style="width:0%"></div>
+          <div class="breadth-bar-fill amber" id="breadthAmber" style="width:0%"></div>
+          <div class="breadth-bar-fill red" id="breadthRed" style="width:0%"></div>
+        </div>
+        <div class="breadth-labels">
+          <span class="label-green" id="breadthGreenLabel">— Up</span>
+          <span class="label-amber" id="breadthAmberLabel">— Flat</span>
+          <span class="label-red" id="breadthRedLabel">— Down</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Tooltip -->
+  <div class="tooltip" id="tooltip"></div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
