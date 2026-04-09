@@ -1,0 +1,7 @@
+{
+  "name": "cryptoradar",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "AI with Jack — CryptoRadar Intelligence Dashboard",
+  "private": true
+}
