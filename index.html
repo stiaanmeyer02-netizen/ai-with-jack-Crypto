@@ -21,8 +21,8 @@
     <div class="header-left">
       <div class="logo">
         <svg width="24" height="24" viewBox="0 0 22 22" fill="none">
-          <circle cx="11" cy="11" r="10" stroke="#3b82f6" stroke-width="1.5" />
-          <path d="M7 11 L11 5 L15 11 L11 17 Z" fill="#3b82f6" opacity="0.8" />
+          <circle cx="11" cy="11" r="10" stroke="#2563eb" stroke-width="1.5" />
+          <path d="M7 11 L11 5 L15 11 L11 17 Z" fill="#2563eb" opacity="0.8" />
           <circle cx="11" cy="11" r="2.5" fill="#60a5fa" />
         </svg>
         <span class="logo-text">CryptoRadar</span>
@@ -56,10 +56,19 @@
         </svg>
         Refresh
       </button>
+      <button class="chat-toggle-btn" id="chatToggleBtn" title="Open AI Market Assistant">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M1 1h12v9H8l-2 2-2-2H1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          <circle cx="4.5" cy="5.5" r="1" fill="currentColor"/>
+          <circle cx="7" cy="5.5" r="1" fill="currentColor"/>
+          <circle cx="9.5" cy="5.5" r="1" fill="currentColor"/>
+        </svg>
+        AI Assistant
+      </button>
     </div>
   </header>
 
-  <main class="main">
+  <main class="main" id="mainContent">
 
     <!-- === SECTION 1: TOP PERFORMERS === -->
     <section class="section" id="topPerformersSection">
@@ -89,10 +98,10 @@
       <div class="divider-line"></div>
       <div class="divider-icon">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <circle cx="8" cy="8" r="3" fill="#f59e0b" />
+          <circle cx="8" cy="8" r="3" fill="#d97706" />
           <path
             d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41"
-            stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round" />
+            stroke="#d97706" stroke-width="1.2" stroke-linecap="round" />
         </svg>
       </div>
       <div class="divider-line"></div>
@@ -143,6 +152,72 @@
 
   </main>
 
+  <!-- Chart Expand Modal -->
+  <div class="chart-modal-overlay" id="chartModalOverlay">
+    <div class="chart-modal" id="chartModal">
+      <div class="chart-modal-header">
+        <div class="chart-modal-coin">
+          <img id="chartModalIcon" src="" alt="" />
+          <div class="chart-modal-coin-info">
+            <h3 id="chartModalName">—</h3>
+            <span id="chartModalSymbol">—</span>
+          </div>
+        </div>
+        <button class="chart-modal-close" id="chartModalClose">✕</button>
+      </div>
+      <div class="chart-modal-price">
+        <span class="price" id="chartModalPrice">—</span>
+        <span class="price-change" id="chartModalChange">—</span>
+      </div>
+      <div class="chart-modal-canvas-wrap">
+        <canvas id="chartModalCanvas"></canvas>
+      </div>
+      <div class="chart-modal-stats" id="chartModalStats"></div>
+    </div>
+  </div>
+
+  <!-- AI Chatbot Panel -->
+  <aside class="chatbot-panel" id="chatbotPanel">
+    <div class="chatbot-header">
+      <div class="chatbot-header-left">
+        <div class="chatbot-icon">🤖</div>
+        <div>
+          <div class="chatbot-title">Market AI Assistant</div>
+          <div class="chatbot-subtitle">Powered by GPT-4o</div>
+        </div>
+      </div>
+      <button class="chatbot-close-btn" id="chatbotCloseBtn">✕</button>
+    </div>
+
+    <div class="chatbot-messages" id="chatbotMessages">
+      <!-- Welcome message injected by JS -->
+    </div>
+
+    <div class="chat-quick-prompts" id="quickPrompts">
+      <button class="quick-prompt-btn" data-prompt="What are the current crypto market trends?">📈 Trends</button>
+      <button class="quick-prompt-btn" data-prompt="Explain Bitcoin dominance and why it matters.">₿ BTC Dom</button>
+      <button class="quick-prompt-btn" data-prompt="What is RSI and how do I use it for trading?">📊 RSI Guide</button>
+      <button class="quick-prompt-btn" data-prompt="How do I spot a volume surge early?">🔊 Volume</button>
+    </div>
+
+    <div class="chatbot-input-area">
+      <div class="chatbot-input-row">
+        <textarea
+          class="chatbot-input"
+          id="chatbotInput"
+          placeholder="Ask about the market, coins, strategies…"
+          rows="1"
+        ></textarea>
+        <button class="chatbot-send-btn" id="chatbotSendBtn" title="Send">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M14 2L1 7l5 2 2 5 6-12z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+      <div class="chatbot-footer-note">AI responses are for informational purposes only — not financial advice.</div>
+    </div>
+  </aside>
+
   <!-- Toast notification -->
   <div class="toast" id="toast"></div>
 
@@ -150,6 +225,11 @@
   <div class="tooltip" id="tooltip"></div>
 
   <script src="app.js"></script>
+  <!-- Vercel Analytics — automatically tracks pageviews & web vitals once deployed -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 
 </html>
